@@ -1,148 +1,108 @@
-<script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import Greet from "./components/Greet.vue";
-</script>
-
 <template>
-  <div class="container">
-    <h1>Welcome to Tauri!</h1>
+   <h1 class="text-3xl font-bold underline">
+    Hello world!
+  </h1>
+  <el-container class="layout-container-demo" style="height: 500px">
+    <el-aside width="200px;height:100%" class="h-full">
+        <el-menu  default-active="1"
+        class="el-menu-vertical-demo"
+        @open="handleOpen"
+        @close="handleClose"
+        active-text-color="#7C5CFC"
+        background-color="rgba(28, 34, 53, 1)"
+        text-color="#fff"
+        >
+        <el-menu-item index="1">
+          <el-icon><icon-menu /></el-icon>
+          <span>知识库</span>
+        </el-menu-item>
 
-    <div class="row">
-      <a href="https://vitejs.dev" target="_blank">
-        <img src="/vite.svg" class="logo vite" alt="Vite logo" />
-      </a>
-      <a href="https://tauri.app" target="_blank">
-        <img src="/tauri.svg" class="logo tauri" alt="Tauri logo" />
-      </a>
-      <a href="https://vuejs.org/" target="_blank">
-        <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-      </a>
-    </div>
+        <el-menu-item index="2">
+          <el-icon><icon-menu /></el-icon>
+          <span>接待大厅</span>
+        </el-menu-item>
+         
+        </el-menu>
+    </el-aside>
 
-    <p>Click on the Tauri, Vite, and Vue logos to learn more.</p>
+    <el-container>
+      <el-header style="text-align: right; font-size: 12px">
+        <div class="toolbar">
+          <el-dropdown>
+            <el-icon style="margin-right: 8px; margin-top: 1px">
+              <setting />
+            </el-icon>
+            <template #dropdown>
+              <el-dropdown-menu>
+                <el-dropdown-item>View</el-dropdown-item>
+                <el-dropdown-item>Add</el-dropdown-item>
+                <el-dropdown-item>Delete</el-dropdown-item>
+              </el-dropdown-menu>
+            </template>
+          </el-dropdown>
+          <span>Tom</span>
+        </div>
+      </el-header>
 
-    <Greet />
-  </div>
+      <el-main>
+        <el-scrollbar>
+          <el-table :data="tableData">
+            <el-table-column prop="date" label="Date" width="140" />
+            <el-table-column prop="name" label="Name" width="120" />
+            <el-table-column prop="address" label="Address" />
+          </el-table>
+        </el-scrollbar>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
+<script lang="ts" setup>
+import { ref } from 'vue'
+import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
+
+const item = {
+  date: '2016-05-02',
+  name: 'Tom',
+  address: 'No. 189, Grove St, Los Angeles',
+}
+const tableData = ref(Array.from({ length: 20 }).fill(item))
+
+const handleOpen = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
+const handleClose = (key: string, keyPath: string[]) => {
+  console.log(key, keyPath)
+}
+</script>
+
 <style scoped>
-.logo.vite:hover {
-  filter: drop-shadow(0 0 2em #747bff);
+.layout-container-demo .el-header {
+  position: relative;
+  background-color:  #fff;
+  color: var(--el-text-color-primary);
 }
-
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #249b73);
+.layout-container-demo .el-aside {
+  color: var(--el-text-color-primary);
+  background: #fff;
 }
-
-:root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 24px;
-  font-weight: 400;
-
-  color: #0f0f0f;
-  background-color: #f6f6f6;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+.layout-container-demo .el-menu {
+  border-right: none;
 }
-
-.container {
-  margin: 0;
-  padding-top: 10vh;
-  display: flex;
-  flex-direction: column;
+.layout-container-demo .el-main {
+  padding: 0;
+}
+.layout-container-demo .toolbar {
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  text-align: center;
+  height: 100%;
+  right: 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: 0.75s;
+.left-menu{
+
+  background-color:  rgba(28, 34, 53, 1);
 }
-
-.logo.tauri:hover {
-  filter: drop-shadow(0 0 2em #24c8db);
-}
-
-.row {
-  display: flex;
-  justify-content: center;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-
-a:hover {
-  color: #535bf2;
-}
-
-h1 {
-  text-align: center;
-}
-
-input,
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  color: #0f0f0f;
-  background-color: #ffffff;
-  transition: border-color 0.25s;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
-}
-
-button {
-  cursor: pointer;
-}
-
-button:hover {
-  border-color: #396cd8;
-}
-button:active {
-  border-color: #396cd8;
-  background-color: #e8e8e8;
-}
-
-input,
-button {
-  outline: none;
-}
-
-#greet-input {
-  margin-right: 5px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: #f6f6f6;
-    background-color: #2f2f2f;
-  }
-
-  a:hover {
-    color: #24c8db;
-  }
-
-  input,
-  button {
-    color: #ffffff;
-    background-color: #0f0f0f98;
-  }
-  button:active {
-    background-color: #0f0f0f69;
-  }
-}
-
 </style>
+
