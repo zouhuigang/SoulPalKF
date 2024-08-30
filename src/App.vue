@@ -1,65 +1,37 @@
 <template>
-   <h1 class="text-3xl font-bold underline">
-    Hello world!
-  </h1>
-  <el-container class="layout-container-demo" style="height: 500px">
-    <el-aside width="200px;height:100%" class="h-full">
-        <el-menu  default-active="1"
+  <el-container class="layout-container-demo">
+    <el-aside width="200px" class="h-full">
+        <el-menu  default-active="/knowledge"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
         active-text-color="#7C5CFC"
         background-color="rgba(28, 34, 53, 1)"
         text-color="#fff"
+        :router="true"
         >
-        <el-menu-item index="1">
-          <el-icon><icon-menu /></el-icon>
+        <el-menu-item index="/knowledge">
+          <el-icon><Promotion /></el-icon>
           <span>知识库</span>
         </el-menu-item>
 
-        <el-menu-item index="2">
-          <el-icon><icon-menu /></el-icon>
+        <el-menu-item index="/service">
+          <el-icon><Service /></el-icon>
           <span>接待大厅</span>
         </el-menu-item>
          
         </el-menu>
     </el-aside>
-
-    <el-container>
-      <el-header style="text-align: right; font-size: 12px">
-        <div class="toolbar">
-          <el-dropdown>
-            <el-icon style="margin-right: 8px; margin-top: 1px">
-              <setting />
-            </el-icon>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item>View</el-dropdown-item>
-                <el-dropdown-item>Add</el-dropdown-item>
-                <el-dropdown-item>Delete</el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-          <span>Tom</span>
-        </div>
-      </el-header>
-
-      <el-main>
-        <el-scrollbar>
-          <el-table :data="tableData">
-            <el-table-column prop="date" label="Date" width="140" />
-            <el-table-column prop="name" label="Name" width="120" />
-            <el-table-column prop="address" label="Address" />
-          </el-table>
-        </el-scrollbar>
-      </el-main>
-    </el-container>
+    <el-main class="main-container">
+      <router-view />
+    </el-main>
+    
   </el-container>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
+import { Promotion, Service } from '@element-plus/icons-vue'
 
 const item = {
   date: '2016-05-02',
@@ -77,6 +49,9 @@ const handleClose = (key: string, keyPath: string[]) => {
 </script>
 
 <style scoped>
+.el-menu{
+    height:100vh
+}
 .layout-container-demo .el-header {
   position: relative;
   background-color:  #fff;
