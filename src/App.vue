@@ -1,6 +1,6 @@
 <template>
   <el-container class="layout-container-demo">
-    <el-aside width="200px" class="h-full">
+    <el-aside width="200px" class="aside-container">
         <el-menu  default-active="/knowledge"
         class="el-menu-vertical-demo"
         @open="handleOpen"
@@ -49,35 +49,28 @@ const handleClose = (key: string, keyPath: string[]) => {
 </script>
 
 <style scoped>
-.el-menu{
-    height:100vh
+
+.layout-container-demo {
+  display: flex;
+  height: 100vh; /* 占满整个视口高度 */
+  overflow: hidden; /* 防止父容器出现滚动条 */
 }
-.layout-container-demo .el-header {
-  position: relative;
-  background-color:  #fff;
-  color: var(--el-text-color-primary);
+
+.aside-container {
+  height: 100%; /* 占满左侧高度 */
+  background-color: rgba(28, 34, 53, 1);
 }
-.layout-container-demo .el-aside {
-  color: var(--el-text-color-primary);
-  background: #fff;
+
+.main-container {
+  flex: 1; /* 右侧内容区域占满剩余空间 */
+  overflow-y: auto; /* 超出高度时出现垂直滚动条 */
+  padding: 20px;
+  background-color: #f5f5f5; /* 可选：右侧内容背景颜色 */
 }
-.layout-container-demo .el-menu {
+
+.el-menu {
+  height: 100%; /* 菜单高度占满左侧容器 */
   border-right: none;
-}
-.layout-container-demo .el-main {
-  padding: 0;
-}
-.layout-container-demo .toolbar {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  right: 20px;
-}
-
-.left-menu{
-
-  background-color:  rgba(28, 34, 53, 1);
 }
 </style>
 
